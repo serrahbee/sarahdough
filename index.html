@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f0e5" />
+    <title>Sarah Dough | Weekly bread orders</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="site-header">
+        <a class="brand" href="#order" aria-label="Sarah Dough home">
+          <span class="brand-mark" aria-hidden="true">SD</span>
+          <span>
+            <strong>Sarah Dough</strong>
+            <small>small-batch bread</small>
+          </span>
+        </a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <button class="nav-button active" data-view="order">Order bread</button>
+          <button class="nav-button" data-view="baker">Baker view</button>
+        </nav>
+      </header>
+
+      <main>
+        <section class="view active" id="order-view" data-view-panel="order">
+          <div class="hero">
+            <p class="eyebrow">This week’s bake</p>
+            <h1>Good bread,<br /><em>made slowly.</em></h1>
+            <p class="hero-copy">Choose your loaves below and pick them up fresh from Sarah’s kitchen.</p>
+            <div class="pickup-note"><span class="dot"></span><span>Orders close Thursday at noon · Pickup Saturday</span></div>
+          </div>
+
+          <form id="order-form" novalidate>
+            <section class="form-section">
+              <div class="section-heading">
+                <span class="step">01</span>
+                <div><h2>Choose your bread</h2><p>Everything is baked to order.</p></div>
+              </div>
+              <div class="menu-grid" id="menu-grid"></div>
+            </section>
+
+            <section class="form-section">
+              <div class="section-heading">
+                <span class="step">02</span>
+                <div><h2>Your details</h2><p>So Sarah knows who to pack for.</p></div>
+              </div>
+              <div class="field-grid">
+                <label class="field">Your name <span class="required">*</span><input id="customer-name" name="name" autocomplete="name" required placeholder="Jane Smith" /></label>
+                <label class="field">Phone or email <span class="required">*</span><input id="customer-contact" name="contact" autocomplete="email" required placeholder="How should Sarah reach you?" /></label>
+              </div>
+              <label class="field">Pickup time <span class="required">*</span>
+                <select id="pickup-slot" name="pickupSlot" required><option value="">Choose a Saturday window</option></select>
+              </label>
+              <label class="field">Anything else? <span class="optional">optional</span><textarea id="order-notes" name="notes" rows="3" placeholder="Allergies, porch pickup notes, or a kind word..."></textarea></label>
+            </section>
+
+            <aside class="order-card" aria-live="polite">
+              <div class="order-card-top"><div><p class="eyebrow">Your order</p><h2 id="summary-title">Nothing selected yet</h2></div><span class="order-icon" aria-hidden="true">✦</span></div>
+              <div id="summary-items" class="summary-items"><p class="empty-summary">Add a loaf to get started.</p></div>
+              <div class="summary-total"><span>Total</span><strong id="summary-total">$0.00</strong></div>
+              <button class="primary-button" type="submit">Send my order <span aria-hidden="true">→</span></button>
+              <p class="fine-print">Sarah will confirm your order by text or email. Payment is due at pickup.</p>
+            </aside>
+          </form>
+        </section>
+
+        <section class="view" id="confirmation-view" data-view-panel="confirmation">
+          <div class="confirmation-card">
+            <div class="confirmation-mark">✓</div>
+            <p class="eyebrow">Order received</p>
+            <h1>Thanks, <span id="confirmation-name">friend</span>.</h1>
+            <p id="confirmation-copy">Sarah has your order and will be in touch to confirm the details.</p>
+            <div class="confirmation-details" id="confirmation-details"></div>
+            <button class="secondary-button" type="button" data-action="new-order">Place another order</button>
+          </div>
+        </section>
+
+        <section class="view" id="baker-view" data-view-panel="baker">
+          <div class="baker-header"><div><p class="eyebrow">Private view</p><h1>This week’s orders</h1><p class="hero-copy">A simple list for baking day and pickup.</p></div><button class="secondary-button" type="button" data-action="export">Export CSV</button></div>
+          <div class="dashboard-stats" id="dashboard-stats"></div>
+          <div class="baker-toolbar"><label class="filter-label" for="status-filter">Show <select id="status-filter"><option value="all">all orders</option><option value="new">new</option><option value="confirmed">confirmed</option><option value="picked-up">picked up</option></select></label><button class="text-button" type="button" data-action="clear-orders">Clear all local orders</button></div>
+          <div class="orders-list" id="orders-list"></div>
+          <div class="baker-help"><strong>Handoff note</strong><p>This prototype stores orders in this browser only. The order form is ready to connect to a Google Form or Sheet when Sarah is ready to accept orders from other phones.</p></div>
+        </section>
+      </main>
+
+      <footer><span>Made with care for Sarah Dough</span><span>Questions? Text Sarah directly.</span></footer>
+    </div>
+  </body>
+</html>
