@@ -7,6 +7,8 @@ const MENU = [
 
 const PICKUP_SLOTS = ["Saturday · 9:00–10:00 am", "Saturday · 10:00–11:00 am", "Saturday · 11:00 am–12:00 pm"];
 const ORDERS_KEY = "sarahDoughOrders";
+// Paste Sarah's deployed Apps Script /exec URL here before launch.
+const GOOGLE_APPS_SCRIPT_URL = "";
 let quantities = Object.fromEntries(MENU.map((item) => [item.id, 0]));
 
 const $ = (selector) => document.querySelector(selector);
@@ -76,14 +78,25 @@ function orderRow(order) {
 
 function escapeHTML(value) { return String(value).replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" }[character])); }
 
-function submitOrder(event) {
+async function submitOrder(event) {
   event.preventDefault();
   const items = selectedItems();
   const form = event.currentTarget;
   if (!items.length) { $("#menu-grid").classList.add("shake"); setTimeout(() => $("#menu-grid").classList.remove("shake"), 350); return; }
   if (!form.reportValidity()) return;
   const order = { id: `order-${Date.now()}`, createdAt: new Date().toISOString(), name: $("#customer-name").value.trim(), contact: $("#customer-contact").value.trim(), pickupSlot: $("#pickup-slot").value, notes: $("#order-notes").value.trim(), items, total: total(items), status: "new" };
-  saveOrders([order, ...getOrders()]);
+  if (GOOGLE_APPS_SCRIPT_URL) {
+    try {
+      // Apps Script accepts this as text/plain, which avoids a browser preflight.
+      await fetch(GOOGLE_APPS_SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(order) });
+    } catch (error) {
+      alert("We couldn't send the order. Please try again or text Sarah directly.");
+      return;
+    }
+  } else {
+    // Local fallback keeps the prototype testable before Apps Script is deployed.
+    saveOrders([order, ...getOrders()]);
+  }
   $("#confirmation-name").textContent = order.name.split(" ")[0];
   $("#confirmation-details").innerHTML = `<strong>${order.items.map((item) => `${item.quantity} × ${escapeHTML(item.name)}`).join("<br />")}</strong><br />${escapeHTML(order.pickupSlot)}<br />Total: ${money(order.total)}`;
   resetForm();
