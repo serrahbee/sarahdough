@@ -2,6 +2,8 @@
 
 A tiny weekly bread-ordering page for replacing orders scattered across text messages.
 
+For a complete explanation of the app, weekly menu edits, Google Apps Script maintenance, and Git/GitHub publishing, see [MAINTENANCE_GUIDE.md](MAINTENANCE_GUIDE.md).
+
 ## Run it
 
 Open `index.html` in a browser, or serve the folder locally:
