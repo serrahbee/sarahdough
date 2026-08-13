@@ -8,7 +8,7 @@ const MENU = [
 const PICKUP_SLOTS = ["Saturday · 9:00–10:00 am", "Saturday · 10:00–11:00 am", "Saturday · 11:00 am–12:00 pm"];
 const ORDERS_KEY = "sarahDoughOrders";
 // Paste Sarah's deployed Apps Script /exec URL here before launch.
-const GOOGLE_APPS_SCRIPT_URL = "";
+const GOOGLE_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwZMPq0dpKhtri1AROK2DCchDAs0_G30aGOOyGP1P2QZUZhyOQhn9SaBlwXW0v7-4l7/exec";
 let quantities = Object.fromEntries(MENU.map((item) => [item.id, 0]));
 
 const $ = (selector) => document.querySelector(selector);
