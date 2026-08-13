@@ -2,6 +2,8 @@
 
 This guide explains what the app is made of, how an order reaches Google Sheets, how to make common changes, and how to publish those changes with Git and GitHub.
 
+For a more detailed introduction to the languages and programming concepts themselves, see [LANGUAGES_GUIDE.md](LANGUAGES_GUIDE.md).
+
 The app is intentionally small. There is no package manager, framework, build process, traditional server, or database. A text editor, a browser, Git, GitHub Pages, Google Sheets, and Google Apps Script are enough to maintain it.
 
 ## Quick reference

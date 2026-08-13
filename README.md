@@ -4,6 +4,8 @@ A tiny weekly bread-ordering page for replacing orders scattered across text mes
 
 For a complete explanation of the app, weekly menu edits, Google Apps Script maintenance, and Git/GitHub publishing, see [MAINTENANCE_GUIDE.md](MAINTENANCE_GUIDE.md).
 
+For a deeper introduction to HTML, CSS, JavaScript, JSON, the DOM, browser events, network requests, and Google Apps Script using this project as the example, see [LANGUAGES_GUIDE.md](LANGUAGES_GUIDE.md).
+
 ## Run it
 
 Open `index.html` in a browser, or serve the folder locally:
